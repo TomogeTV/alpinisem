@@ -5206,7 +5206,11 @@ if(bootEl)setTimeout(()=>bootEl.remove(),150);
   const sync=()=>{$('#jn-mail').textContent=mail();const u=form();
     ['#jn-go','#jn-go2'].forEach(s=>{const a=$(s);if(u){a.href=u;a.removeAttribute('aria-disabled')}else{a.href='#';a.setAttribute('aria-disabled','true')}})};
   Join.onSync(sync);sync();
-  ['#jn-go','#jn-go2'].forEach(s=>$(s).addEventListener('click',e=>{if(!form()){e.preventDefault();toast('Le formulaire ouvre très bientôt. En attendant, écris-nous à '+mail()+'.')}}))}
+  ['#jn-go','#jn-go2'].forEach(s=>$(s).addEventListener('click',e=>{if(!form()){e.preventDefault();toast('Le formulaire ouvre très bientôt. En attendant, écris-nous à '+mail()+'.')}}))
+  /* [Ajout Benjamin · 2026-11-13] Page candidature : un clic n'importe où (sauf « Retour au site » et Instagram) ouvre le Google Form */
+  $('#join').addEventListener('click',e=>{if(e.target.closest('.jn-top'))return;const u=form();if(!u)return;
+    e.preventDefault();e.stopPropagation();window.open(u,'_blank','noopener')},true);
+  /* fin ajout Benjamin */}
 
 })();
 
